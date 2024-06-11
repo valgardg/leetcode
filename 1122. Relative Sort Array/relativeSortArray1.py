@@ -24,17 +24,27 @@ class Solution(object):
     def relativeSortArray(self, arr1, arr2):
         output = []
         oddList = []
-        
+        hashMap = {}
         # first handle the relative ordering of items that appear in second array
-        for el1 in arr2:
-            for el2 in arr1:
-                if(el2 == el1):
-                    output.append(el2)
+        for element in arr1:
+            if(element not in arr2):
+                continue
+            if(element in hashMap):
+                hashMap[element].append(element)
+            else:
+                hashMap[element] = [element]
+
+        print(hashMap)
+
         # handle all elements not appearing in second array
+        for item in arr2:
+            if(item in arr1):
+                output += hashMap[item]
         for item in arr1:
             if(item not in arr2):
                 oddList.append(item)
         oddList.sort()
+        print(oddList)
         return output + oddList
     
 def main():
