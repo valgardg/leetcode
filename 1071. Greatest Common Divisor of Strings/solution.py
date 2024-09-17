@@ -19,5 +19,3 @@ class Solution(object):
 
 solution = Solution()
 solution.solve()
-
-# testing
