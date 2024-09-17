@@ -1,20 +1,34 @@
 from typing import List
 
 class Solution:
+    def prefixArray(self, nums: List[int]) -> List[int]:
+        pref = [1] * len(nums)
+        for i in range(1, len(nums)):
+            pref[i] = pref[i-1] * nums[i]
+        print(f'prefix: {pref}')
+        return pref
+
+    def suffixArray(self, nums: List[int]) -> List[int]:
+        suf = [1] * len(nums)
+        for i in range(len(nums)-2, 1, -1):
+            # print(f'i is {i}, suf={suf}, nums={nums}')
+            suf[i] = nums[i-1] * nums[i-2]
+        print(f'suffix: {suf}')
+        return suf
+    
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        finalList = []
-        for i in range(len(nums)):
-            total = None
-            for l in range(len(nums)):
-                if(l != i):
-                    if(total == None):
-                        total = nums[l]
-                    else:
-                        total *= nums[l]
-            finalList.append(total)
-        return finalList
+        pref = self.prefixArray(nums)
+        suf = self.suffixArray(nums)
+
+        final = []
+        for i in range(len(pref)):
+            # print(f'pref[i]: {pref[i]}, suf[i]: {suf[i]}')
+            final.append(pref[i] * suf[i])
+        return final
                 
 
 solution = Solution()
+# print(solution.prefixArray([1,2,3,4]))
+# print(solution.suffixArray([1,2,3,4]))
 print(solution.productExceptSelf([1,2,3,4]))
-print(solution.productExceptSelf([-1,1,0,-3,3]))
+# print(solution.prefixArray([-1,1,0,-3,3]))
