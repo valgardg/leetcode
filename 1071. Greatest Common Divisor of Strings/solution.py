@@ -1,3 +1,5 @@
+import math
+
 class Solution(object):
     def gcdOfStrings(self, str1, str2):
         """
@@ -5,17 +7,15 @@ class Solution(object):
         :type str2: str
         :rtype: str
         """
-        l1 = len(str1)
-        topAnswer = ''
-        testChar = ''
-        for char in str2:
-            testChar += char
-            if((str1 == (testChar * (l1 // len(testChar))))):
-                topAnswer = testChar
-        return topAnswer
+        if str1 + str2 != str2 + str1:
+            return ''
+        
+        gcd_len = math.gcd(len(str1), len(str2))
+        return str1[:gcd_len]
 
     def solve(self):
-        print(self.gcdOfStrings("ABABAB", "ABAB"))
-
+        print(self.gcdOfStrings("TAUXXTAUXXTAUXXTAUXXTAUXX", "TAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXX"))
+        print(self.gcdOfStrings("ABABABAB", "ABAB"))
+        print(self.gcdOfStrings("AAAAAA", "AACC"))
 solution = Solution()
 solution.solve()
