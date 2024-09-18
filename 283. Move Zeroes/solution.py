@@ -5,16 +5,17 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        exces = 0
-        for i in range(len(nums)):
-            if(exces):
-                i -= 1
-            print(f'i running for value {i}')
-            if nums[i] == 0:
-                for c in range(i, (len(nums) - i) -1):
-                    nums[c] = nums[c+1]
-                nums[-1] = 0
-                exces += 1
-            print(f'nums after iteration: {nums}, i: {i}')
+        lastNonZeroIndex = 0
 
-        print(f'final nums: {nums}')
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                nums[lastNonZeroIndex] = nums[i]
+                lastNonZeroIndex +=1
+            
+        for i in range(lastNonZeroIndex, len(nums)):
+            nums[i] = 0
+            
+        print(nums)
+
+# Solution().moveZeroes([0,0,1])
+Solution().moveZeroes([0,1,0,0,0,3,12])
