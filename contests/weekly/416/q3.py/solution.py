@@ -14,9 +14,9 @@ class Solution:
     def validSubstringCount(self, word1: str, word2: str) -> int:
         count = 0
         for x in range(len(word1)):
-            for i in range(x+1, len(word1)+1):
-                # print(i)
+            for i in range(x+len(word2), len(word1)+1):
                 substring = word1[x:i]
+                print(substring)
                 if(len(substring) < len(word2)):
                     pass
                 else:
