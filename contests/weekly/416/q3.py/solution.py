@@ -22,6 +22,10 @@ class Solution:
                 else:
                     if self.canRearrange(substring,word2):
                         count +=1
+                        print(len(word1)+1)
+                        print(i)
+                        count += len(word1) - i
+                        break
         
         return count
 
