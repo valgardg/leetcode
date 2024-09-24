@@ -2,39 +2,34 @@ from typing import List
 
 class Solution:
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        n = len(asteroids)
-        pp = 0
+        stack = []
 
-        while pp != n:
-            if asteroids[pp] < 0:
-                if pp == 0:
-                    pp += 1
-                    pass
+        for a in asteroids:
+            if a < 0:
+                if len(stack) < 1:
+                    stack.append(a)
                 else:
-                    pv = asteroids[pp-1]
-                    if(pv < 0):
-                        pp += 1
-                    # collision
+                    # handle negative asteroid
+                    if stack[-1] < 0:
+                        stack.append(a)
                     else:
-                        if abs(pv) > abs(asteroids[pp]):
-                            asteroids = asteroids[:pp] + asteroids[pp+1:]
-                            n -= 1
-                            pp -= 1
-                        elif abs(pv) == abs(asteroids[pp]):
-                            asteroids = asteroids[:pp-1] + asteroids[pp+1:]
-                            n -= 2
-                            pp -= 2
-                        else:
-                            asteroids = asteroids[:pp-1] + asteroids[pp:]
-                            n -= 1
-                            pp -= 1
+                        pv = stack.pop()
+                        if abs(pv) > abs(a):
+                            stack.append(pv)
+                        elif abs(a) > abs(pv):
+                            stack.append(a)
+                        
+                        while len(stack) > 1 and stack[-2] > 0 and stack[-1] < 0:
+                            v1 = stack.pop()
+                            v2 = stack.pop()
+
+                            if abs(v1) > abs(v2):
+                                stack.append(v1)
+                            elif abs(v2) > abs(v1):
+                                stack.append(v2)
             else:
-                pp += 1
-            
-            if pp < 0:
-                pp = 0
-            
-        return asteroids
+                stack.append(a)
+        return stack
 
 print(Solution().asteroidCollision([5,10,-5]))
 print(Solution().asteroidCollision([8, -8]))
