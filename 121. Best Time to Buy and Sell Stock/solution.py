@@ -1,8 +1,6 @@
 from typing import List
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        max_profit = 0
-        
         lp = 0
         rp = 0
 
@@ -15,7 +13,6 @@ class Solution:
             else:
                 rp += 1
             
-
         return max_profit
 
 print(Solution().maxProfit([7,1,5,3,6,4]))
