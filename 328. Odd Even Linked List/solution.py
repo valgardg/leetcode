@@ -9,36 +9,36 @@ class Solution:
         previousOdd = None
         previousEven = None
         firstEven = None
+        firstOdd = head
 
         cnt = 1
 
         if head == None or head.next == None:
             return head
 
-        cn = head
-        while cn != None:
+        while head != None:
             # print(f'looking at value {cn.val}')
             if (cnt % 2) == 0:
                 if firstEven == None:
-                    firstEven = cn
+                    firstEven = head
                     # print(f'Making firstEven {cn.val}')
                 if previousEven == None:
-                    previousEven = cn
+                    previousEven = head
                     # print(f'Making previousEven = {cn.val}')
                 else:
-                    previousEven.next = cn
-                    previousEven = cn
+                    previousEven.next = head
+                    previousEven = head
                     # print(f'Making previousEven.next = {cn.val} and previousEven = {cn.val}')
             else:
                 if previousOdd == None:
-                    previousOdd = cn
+                    previousOdd = head
                     # print(f'Making previousOdd = {cn.val}')
                 else:
-                    previousOdd.next = cn
-                    previousOdd = cn
+                    previousOdd.next = head
+                    previousOdd = head
                     # print(f'Making previousOdd.next = {cn.val} and previousOdd = {cn.val}')
-            if(cn.next):
-                cn = cn.next
+            if(head.next):
+                head = head.next
             else:
                 break
             cnt += 1
@@ -46,7 +46,7 @@ class Solution:
         previousOdd.next = firstEven
         previousEven.next = None
 
-        return head
+        return firstOdd
     
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 answer = (Solution().oddEvenList(head))
