@@ -13,17 +13,17 @@ class Solution:
             else:
                 heights[height] = height
 
-        return heights.values()
+        return sum(heights.values())
     
     def updateHeight(self, height, heights):
         # if we are encountering a height for the second time and th
         if height in heights:
             existingHeight = heights[height]
-            while existingHeight > 0:
+            while existingHeight > 1:
                 existingHeight -= 1
                 if existingHeight not in heights:
                     heights[existingHeight] = existingHeight
-                    print(f'updated heights: {heights}')
+                    # print(f'updated heights: {heights}')
                     return 1
             return -1
             
@@ -31,3 +31,7 @@ class Solution:
 
 
 print(Solution().maximumTotalSum([2,3,4,3]))
+
+print(Solution().maximumTotalSum([15,10]))
+
+print(Solution().maximumTotalSum([2,2,1]))
