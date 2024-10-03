@@ -12,5 +12,3 @@ class Solution:
     
 print(Solution().groupAnagrams(['eat','tea','tan','ate','nat','bat']))
 print(Solution().groupAnagrams(['']))
-
-# solved 49
