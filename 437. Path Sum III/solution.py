@@ -9,20 +9,29 @@ class TreeNode:
         self.right = right
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        cnt = 0
+        count = 0
+        self.paths = []
+        self.traverse(root, [])
+        for path in self.paths:
+            if sum(path) == targetSum:
+                count += 1
+            if sum(path) > targetSum:
+                # handle something
+                lp, rp = 0, len(path)
+                while :
+                    
+                pass
+            
+        return count
 
-        self.traverse(root)
-
-        return cnt
-
-    def traverse(self, root):
-        print(root.val)
-        if not root.left and not root.right:
-            return None
+    def traverse(self, root, path):
+        path.append(root.val)
+        self.paths.append(list(path))
         if root.left:
-            self.traverse(root.left)
+            self.traverse(root.left, list(path))
         if root.right:
-            self.traverse(root.right)
+            self.traverse(root.right, list(path))
+        return 
 
 troot = listToTreeNode([10,5,-3,3,2,None,11,3,-2,None,1])
 print(Solution().pathSum(troot, 8))
