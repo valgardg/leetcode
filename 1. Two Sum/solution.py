@@ -1,5 +1,5 @@
 from typing import List
-def twoSum(self, nums: List[int], target: int) -> List[int]:
+def twoSum(nums: List[int], target: int) -> List[int]:
         nd = {}
         for i in range(len(nums)):
             num = nums[i]
