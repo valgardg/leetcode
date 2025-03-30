@@ -1,25 +1,21 @@
+from collections import defaultdict
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        ds = {}
-        dt = {}
         if len(s) != len(t):
             return False
+        og = defaultdict(int)
+
         for i in range(len(s)):
-            schar = s[i]
-            tchar = t[i]
-            if schar in ds:
-                ds[schar] += 1
-            else:
-                ds[schar] = 1
+            og_char = s[i]
+            other_char = t[i]
 
-            if tchar in dt:
-                dt[tchar] += 1
-            else:
-                dt[tchar] = 1
+            og[og_char] += 1
+            og[other_char] -= 1
 
-        for key in ds.keys():
-            if key not in dt:
-                return False
-            if dt[key] != ds[key]:
+        for key in og.keys():
+            if og[key] != 0:
                 return False
         return True
+
+
+print(Solution().isAnagram("catt", "tcat"))
