@@ -1,38 +1,20 @@
 from typing import List
-
 class Solution:
-    def prefixArray(self, nums: List[int]) -> List[int]:
-        pref = [1] * len(nums)
-        for i in range(1, len(nums)):
-            pref[i] = pref[i-1] * nums[i-1]
-            print(f'i: {i}, pref[i-2]: {pref[i-1]}, nums[i-1]: {nums[i-1]}')
-        print(f'prefix: {pref}')
-        return pref
-
-    def suffixArray(self, nums: List[int]) -> List[int]:
-        suf = [1] * len(nums)
-        for i in range(len(nums)-2, -1, -1):
-            suf[i] = suf[i+1] * nums[i+1]
-            print(f'i: {i}, suf[i+1]: {suf[i+1]}, nums[i+1]: {nums[i+1]}')
-        print(f'suffix: {suf}')
-        return suf
-    
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        pref = [1] * len(nums)
-        suf = [1] * len(nums)
-        final = [1] * len(nums)
-        for i in range(1, len(nums)):
-            suf_index = abs(i-(len(nums))+1)
-            # print(f'i/suf_index: {i} / {suf_index}')
-            pref[i] = pref[i-1] * nums[i-1]
-            suf[suf_index] = suf[suf_index+1] * nums[suf_index+1]
-        
-        # print(f'i: {i}\npref:{pref}\nsuf:{suf}')
-        for i in range(len(final)):
-            final[i] = pref[i] * suf[i]
+        preff = [1]
+        suff = [1]
 
-        return final
-                
+        rvp = 1
+        rvs = 1
+
+        for i in range(len(nums)-1):
+            rvp = rvp * nums[i]
+            preff.append(rvp)
+            rvs = rvs * nums[len(nums)-i-1]
+            suff.append(rvs)
+
+        return [preff[i] * suff[len(suff) - i -1] for i in range(len(suff))]
+
 
 solution = Solution()
 # print(solution.prefixArray([1,2,3,4]))
