@@ -1,18 +1,12 @@
 from typing import List
+from collections import defaultdict
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        fd = {}
+        tracker = defaultdict(int)
         for num in nums:
-            if num in fd:
-                fd[num] += 1
-            else:
-                fd[num] = 1
-            val = fd[num]
-        print(fd)
-        sfd = sorted(fd.items(), key=lambda x: x[1], reverse=True)
-        print(sfd)
-        for item in sfd[:k]:
-            print(item[0])
-        return [item[0] for item in sfd[:k]]
-
-print(Solution().topKFrequent([1,1,1,2,2,3], 2))
+            tracker[num] += 1
+        stracker = sorted(tracker.items(), key=lambda item: item[1], reverse=True)
+        return [key for key,_ in stracker[:k]]
+# print(Solution().topKFrequent([1,1,1,2,2,3], 2))
+# print(Solution().topKFrequent([3,0,1,0], 1))
+print(Solution().topKFrequent([4,1,-1,2,-1,2,3], 2))
